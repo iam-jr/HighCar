@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>High Car</title>
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ff6600">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="High Car">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <div class="game-title">High Car</div>
+            <div class="score">Score: <span id="score">0</span></div>
+            <div class="lives">Lives: <span id="lives">3</span></div>
+            <div class="level">Level: <span id="level">1</span></div>
+            <div class="fuel">Fuel: <span id="fuel">100</span></div>
+            <div class="cargo">Coins: <span id="cargo">0</span></div>
+            <div class="highscore">Highscore: <span id="highScore">0</span></div>
+            <button id="pauseBtn" class="pause-control" type="button">PAUSE</button>
+        </div>
+
+        <div class="start-screen active" id="startScreen">
+            <div>
+                <h2>HIGH CAR</h2>
+                <p class="start-badge">High Score 0 pts | Level 1</p>
+                <div class="player-form access-panel">
+                    <h3 class="panel-title">Player Access</h3>
+                    <div class="entry-grid">
+                        <div class="input-group">
+                            <label for="playerNameInput">Name</label>
+                            <input type="text" id="playerNameInput" maxlength="14" placeholder="Enter a name" autocomplete="off">
+                        </div>
+                        <div class="entry-separator">or</div>
+                        <div class="input-group">
+                            <label for="playerCodeInput">ID Code (3 digits)</label>
+                            <input type="text" id="playerCodeInput" maxlength="3" inputmode="numeric" pattern="[0-9]*" placeholder="001" autocomplete="off">
+                        </div>
+                    </div>
+                    <p class="entry-hint">Enter with name or code. If both, they must match.</p>
+                    <p id="nameError" class="name-error">You must enter name or code to start.</p>
+                </div>
+                <h3>Leaderboard</h3>
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Player</th>
+                            <th>High Score</th>
+                            <th>Code</th>
+                        </tr>
+                    </thead>
+                    <tbody id="startLeaderboardBody"></tbody>
+                </table>
+                <button id="startGameBtn">Start Game</button>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+        <div class="promo-strip" id="promoStrip" aria-label="Road gallery">
+            <div class="promo-slide active" style="--slide-bg: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1280&q=80');"></div>
+            <div class="promo-slide" style="--slide-bg: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1280&q=80');"></div>
+            <div class="promo-slide" style="--slide-bg: url('https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1280&q=80');"></div>
+            <div class="promo-slide" style="--slide-bg: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1280&q=80');"></div>
+            <div class="promo-overlay">
+                <span>Road Moments</span>
+                <small>Auto switch every 6s</small>
+            </div>
+        </div>
+        <div class="pause-menu" id="pauseMenu">
+            <div>
+                <h2>PAUSA</h2>
+                <p>Haz clic en REANUDAR para continuar</p>
+                <button id="resumeBtn">REANUDAR</button>
+            </div>
+        </div>
+        <div class="game-over" id="gameOver">
+            <h2>GAME OVER</h2>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <p>Level Reached: <span id="finalLevel">1</span> | Lives Left: <span id="finalLives">0</span></p>
+            <h3>Leaderboard</h3>
+            <table class="ranking-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Player</th>
+                        <th>High Score</th>
+                        <th>Code</th>
+                    </tr>
+                </thead>
+                <tbody id="endLeaderboardBody"></tbody>
+            </table>
+            <button id="restartBtn">New Game</button>
+        </div>
+        <div class="instructions" id="instructions">
+            <h3>Controls:</h3>
+            <p>Mouse/touch moves the car | SPACE for nitro boost | Collect coins, fuel, power-ups | Avoid obstacles | PAUSE button | Arrow keys also work</p>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
