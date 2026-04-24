@@ -138,6 +138,11 @@ body {
     color: #ffd3a8;
 }
 
+.menu-promo-strip {
+    height: 110px;
+    margin-bottom: 18px;
+}
+
 .game-over {
     position: absolute;
     top: 50%;
@@ -439,6 +444,10 @@ body {
     }
     .ranking-table {
         margin-bottom: 12px;
+    }
+    .menu-promo-strip {
+        height: 88px;
+        margin-bottom: 14px;
     }
     .start-screen.active ~ .promo-strip {
         opacity: 0.55;
