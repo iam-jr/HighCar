@@ -215,29 +215,34 @@ if (window.visualViewport) {
 }
 
 function initPromoStrip() {
-    if (!promoStripEl) {
+    const promoStrips = Array.from(document.querySelectorAll('.promo-strip'));
+    if (promoStrips.length === 0) {
         return;
     }
 
-    const slides = Array.from(promoStripEl.querySelectorAll('.promo-slide'));
-    if (slides.length <= 1) {
-        return;
-    }
+    promoStrips.forEach((promoStrip) => {
+        const slides = Array.from(promoStrip.querySelectorAll('.promo-slide'));
+        if (slides.length <= 1) {
+            return;
+        }
 
-    let activeSlideIndex = 0;
-    slides.forEach((slide, index) => {
-        slide.classList.toggle('active', index === 0);
-    });
-
-    window.setInterval(() => {
-        activeSlideIndex = (activeSlideIndex + 1) % slides.length;
+        let activeSlideIndex = 0;
         slides.forEach((slide, index) => {
-            slide.classList.toggle('active', index === activeSlideIndex);
+            slide.classList.toggle('active', index === 0);
         });
 
-        // Keep canvas perfectly fitted whenever the mobile UI chrome changes.
-        resizeCanvas();
-    }, 6000);
+        window.setInterval(() => {
+            activeSlideIndex = (activeSlideIndex + 1) % slides.length;
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === activeSlideIndex);
+            });
+
+            if (promoStrip === promoStripEl) {
+                // Keep canvas perfectly fitted whenever the mobile UI chrome changes.
+                resizeCanvas();
+            }
+        }, 6000);
+    });
 }
 
 initPromoStrip();
